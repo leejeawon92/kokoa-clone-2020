@@ -1,0 +1,26 @@
+.nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: hsl(240, 9%, 98%);
+  padding: 20px 50px;
+  box-sizing: border-box;
+  border-top: 1px solid rgba(121, 121, 121, 0.3);
+}
+
+.nav__list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav__link {
+  position: relative;
+  color: #2e363e;
+}
+
+.nav__notification {
+  /*①을 message icon 우측 상단위에 배치*/
+  position: absolute;
+  left: 15px;
+  bottom: 15px;
+}

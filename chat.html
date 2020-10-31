@@ -4,9 +4,9 @@
     <link rel="stylesheet" href="css/styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, ini tial-scale=1.0">
-    <title>Welcocme to Kokoa Talk</title>
+    <title>Chat - Kokoa Clone</title>
 </head>
-<body>
+<body id="chat-screen">
     <div class="status-bar">
         <div class="status-bar__column">
             <span>No Service</span>
@@ -24,19 +24,28 @@
         </div>
     </div>
 
-    <header class="welcome-header">
-        <h1 class="welcome-header__title">Welcome to Kokoa Talk</h1>
-        <p class="welcome-header__text">if you have a kokoa Account, log in with your email or phone number</p>
-    </header>
+   <header class="alt-header">
+       <div class="alt-header__column">
+           <a href="chats.html">
+               <i class="fas fa-angle-left fa-3x"></i>
+           </a>
+       </div>
+       <div class="alt-header__column">
+           <h1 class="alt-header__title">JW</h1>
+       </div>
+       <div class="alt-header__column">
+           <span><i class="fas fa-search fa-lg"></i></span>
+           <span><i class="fas fa-bars fa-lg"></i></span>
+       </div>
+   </header>
 
-    <form action="friends.html" method="get" id="login-form">
-        <input name="username" type="text" placeholder="Email or phone number">
-        <input name="password" type="password" placeholder="Password">
-        <input type="submit" value="Log In"
-    </form>
 
-    <a href="#">Find Kokoa Account or Password</a>
-    
+    <main class="main-screen main-chat">
+        <div class="chat__timestamp">
+            헥사년 998년
+        </div>
+    </main>
+
     <script src="https://kit.fontawesome.com/6478f529f2.js" crossorigin="anonymous"></script>
 </body>
 </html>

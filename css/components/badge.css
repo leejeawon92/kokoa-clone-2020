@@ -1,0 +1,16 @@
+.badge {
+  /*동그라미 만들기*/
+  background-color: tomato;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+
+  /*동그라미 중앙에 1 배치시키기*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /*"1" 글자색변경및 사이즈늘리기*/
+  color: white;
+  font-weight: 600;
+}
