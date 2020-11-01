@@ -1,3 +1,3 @@
-# kokoa clone 2020 office
+# kokoa clone 2020
 
-회사버전입니다.
+Home 버전입니다.
