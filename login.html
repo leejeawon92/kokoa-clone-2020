@@ -4,6 +4,8 @@
     <link rel="stylesheet" href="css/styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, ini tial-scale=1.0">
+     <!-- width=device-width: 웹 페이지의 크기가 모니터가 스마트폰의 실제 액정 크기를 따라가도록  -->
+     <!-- initial-scale=1 : 보여지는 화면의 zoom up 정도를 1배율 -->
     <title>Welcocme to Kokoa Talk</title>
 </head>
 <body>
@@ -29,17 +31,19 @@
         <p class="welcome-header__text">if you have a kokoa Account, log in with your email or phone number</p>
     </header>
 
-    <form action="friends.html" method="get" id="login-form">
+    <form action="friends.html"get" id="login-form">
         <input name="username" type="text" placeholder="Email or phone number">
         <input name="password" type="password" placeholder="Password">
-        <input type="submit" value="Log In"
+        <input type="submit" value="Log In">
+        <a href="#">Find Kokoa Account or Password</a>
     </form>
 
     <div id="no-mobile">
+        <span class="wave"></span>
         <span>Your Screen is too big</span>
     </div>
 
-    <a href="#">Find Kokoa Account or Password</a>
+  
     
     <script src="https://kit.fontawesome.com/6478f529f2.js" crossorigin="anonymous"></script>
 </body>

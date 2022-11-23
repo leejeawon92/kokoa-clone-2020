@@ -1,14 +1,14 @@
 .welcome-header {
-  margin: 90px 0px;
+  margin: 90px 0px; /*status-bar와 위아래 간격*/
   text-align: center;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: column; /*tetx와 title을 수직*/
+  align-items: center; /*tetx와 title을 수직으로 정렬*/
   font-weight: 600;
 }
 
 .welcome-header__title {
-  margin-bottom: 40px;
+  margin-bottom: 40px; /* title과 text 위아래 간격*/
   font-size: 25px;
 }
 
@@ -19,7 +19,7 @@
 
 #login-form {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* 수직으로 정렬*/
   margin: 0px 30px;
 }
 
@@ -31,8 +31,8 @@
 }
 
 #login-form input:not([type="submit"]) {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-  transition: border-color 0.3s ease-in-out;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3); /* solid: 일반적인 라인 테두리 */
+  transition: border-color 0.3s ease-in-out; /* border-color를 0.3초 천천히시작되었다가 천천히 끝난다 */
 }
 
 #login-form input::placeholder {
@@ -46,8 +46,15 @@
 #login-form input[type="submit"] {
   background-color: var(--yellow);
   cursor: pointer;
-  padding: 20px 0px;
+  padding: 20px 10px; 
   border-radius: 5px;
+  cursor: pointer;
+  /* -webkit-transition-duration: 0.4s; */
+  transition-duration: 0.4s;
+}
+
+#login-form input[type="submit"]:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #login-form a {
@@ -56,3 +63,13 @@
   color: inherit;
   font-size: 13px;
 }
+
+/*
+<<transition 속성>>
+1. linear : 전환(transition) 효과가 처음부터 끝까지 일정한 속도로 진행됩니다.
+2. ease : 기본값으로, 전환(transition) 효과가 천천히 시작되어, 그다음에는 빨라지고, 마지막에는 다시 느려집니다.
+3. ease-in : 전환(transition) 효과가 천천히 시작됩니다.
+4. ease-out : 전환(transition) 효과가 천천히 끝납니다.
+5. ease-in-out : 전환(transition) 효과가 천천히 시작되어, 천천히 끝납니다.
+6. cubic-bezier(n,n,n,n) : 전환(transition) 효과가 사용자가 정의한 cubic-bezier 함수에 따라 진행됩니다.
+*/

@@ -1,6 +1,6 @@
 #friends-display-link {
   text-align: center;
-  display: block;
+  display: block; /* a태그는 lnline이기 때문에 block을 줘서 한줄로 만들기*/
   background-color: #fafafa;
   padding: 15px 10px;
   font-size: 20px;

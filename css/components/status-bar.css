@@ -13,7 +13,7 @@
 }
 
 .status-bar__column:first-child span {
-  margin-right: 5px;
+  margin-right: 5px; /* noservice와 wife아이콘 사이 간격*/
 }
 
 .status-bar__column:nth-child(2) {

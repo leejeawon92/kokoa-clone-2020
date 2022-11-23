@@ -27,3 +27,12 @@
 .screen-header__icons .fa-cog:hover {
   animation: rotateCog 1s linear infinite;
 }
+
+/*
+.screen-header{} 
+ * div 태그는 block이기 때문에 status-bar와 screen-header는 각각 다른줄에 보인다(CSS적용전)
+ * reset.css로 인해 margin,border,paading이 전부 0에서 시작 
+ * sttus-bar와 screen-header를 각각 flex로 하기 때문에 inline으로 변경됨에 따라서 겹치게 된다(CSS적용후)
+ * padding만을 줘도  sttus-bar와 screen-header를 겹치지 않게 떨어뜨릴수 있다.
+ * margin-bottom을 준 이유는 #friends-display-link와 .screen-header 사이에 경제를 주기 위함
+*/

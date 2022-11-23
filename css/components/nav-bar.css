@@ -6,6 +6,7 @@
   padding: 20px 50px;
   box-sizing: border-box;
   border-top: 1px solid rgba(121, 121, 121, 0.3);
+  border-radius: 30px;
 }
 
 .nav__list {
@@ -65,3 +66,14 @@
 .nav__btn:last-child {
   animation-delay: 0.8s;
 }
+
+/*
+# box-sizing
+ * 요소의 너비와높이를 계산하는 방법 정의
+ = width와 height에 padding과 border를 포함할지 여부를 결정
+
+ * border-box;
+  - 우리가 선언한 width값에 padding을 주더라도 자동으로 실제 컨텐츠 부분의 width가 줄어들면서 padding이 안쪽으로 파고들게 되어 실제 웹에서 보여지는 width값이 우리가 선언한 값 그대로 유지
+
+
+*/

@@ -1,5 +1,5 @@
 .user-component {
-  justify-content: space-between;
+  justify-content: space-between; /*수평으로 동일 간격*/
 }
 
 .user-component,
@@ -37,17 +37,35 @@
 }
 
 .user-component__title--not-bold {
-  font-weight: 400;
+  font-weight: 600;
 }
 
 .user-component__column:last-child {
-  color: rgba(0, 0, 0, 0.5);
+  color: black;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
 }
 
 .user-component__time {
   margin-bottom: 15px;
   display: block;
 }
+
+/*
+.user-component__column:last-child {}에서 아래와 같이 변경도 가능
+
+.user-component__column div span,
+.user-component__column div i {
+  color: black;
+}
+*/
+
+/*
+.user-component__column:first-child {}는 
+.friends-screen__channel의 자식(user-component)중에 
+첫번째자식인 img와 .user-component__text을 말한다.
+
+
+
+*/
