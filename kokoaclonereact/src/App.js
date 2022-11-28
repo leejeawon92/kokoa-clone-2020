@@ -8,6 +8,10 @@ import {MdArrowUpward} from 'react-icons/md'
 import jeawon from './image/jeawon.jpg'
 import 열렙전사 from './image/열렙전사.jpg'
 
+import Nav from './Routes/Navbar.js';
+import { Route, Router, Switch } from 'react-router-dom';
+
+
 const StatusBar = styled.div`
   width: 33%;
   top: 0px;
@@ -133,12 +137,6 @@ const ChannelSubtitle = styled.h6`
   color: rgba(0, 0, 0, 0.5);
 `
 
-
-
-
-
-
-
 function App() {
   return (
     <div className="App">
@@ -202,25 +200,9 @@ function App() {
           <UserState></UserState>
         </ChannelComponent>
       </Channel>
-
-
-
-
-
-      <></>
-
-
-
-
-
-
-
-
-
-
-
-
       
+      <Nav />
+      <></>
     </div>
   );
 }
