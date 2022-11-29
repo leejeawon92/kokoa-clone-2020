@@ -31,7 +31,8 @@ const ChannelTitle = styled.h4`
   font-weight: 600;
   font-size: 22px;
 `
-const ChannelSubtitle = styled.h6`
+const ChannelSubtitle = styled.span`
+  display: flex;
   margin-top: 5px;
   color: rgba(0, 0, 0, 0.5);
 `

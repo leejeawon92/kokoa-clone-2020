@@ -7,8 +7,7 @@ const ScreenHeader = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: var(--horizontal-space);
-  margin-bottom: 15px;
-
+  margin-top: 15px;
 `
 
 const HeaderTitle = styled.h1`
@@ -22,10 +21,10 @@ const Icons = styled.div`
   }
 `
 
-function Screenheader(){
+function Screenheader({title}){
   return (
     <ScreenHeader>
-      <HeaderTitle>Friend</HeaderTitle>
+      <HeaderTitle>{title}</HeaderTitle>
       <Icons>
         <ImSearch className='icon' />
         <FaMusic className='icon'/>

@@ -3,6 +3,8 @@ import {AiOutlineRightCircle} from 'react-icons/ai'
 import { FaInfoCircle} from 'react-icons/fa'
 import Usercomponet from '../components/User'
 import Channelcomponet from '../components/Channel'
+import Screenheader from '../components/ScreenHeader'
+import jeawon from '../image/jeawon.jpg'
 
 const InfoDisplay = styled.a`
 text-align: center;
@@ -20,12 +22,13 @@ margin-top: -15px;
 function Friend(){
   return(
     <>
-      <Usercomponet />
+      <Screenheader title='Friend'/> 
       <InfoDisplay>
         <FaInfoCircle className='info' />
         Friends Names Display 
         <AiOutlineRightCircle/>
       </InfoDisplay>
+      <Usercomponet avatar={jeawon} name='jeawon' subtitle='열공모드' />
       <Channelcomponet />  
     </>
   )
