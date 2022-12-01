@@ -26,6 +26,7 @@ const UserTitle = styled.h4`
 
 const UserSubtitle = styled.span`
   display: flex;
+  font-size: 15px;
   margin-top: 5px;
   color: rgba(0, 0, 0, 0.5);
 `
@@ -64,7 +65,7 @@ function Usercomponet({avatar, name, subtitle, time, count  }){
       </UserDesc>
       <UserState>
         <Time>{time}</Time>
-        <MessageCount>{count}</MessageCount>
+        {count ? <MessageCount>{count}</MessageCount> : null}
       </UserState>
     </UserComponent>
   )
