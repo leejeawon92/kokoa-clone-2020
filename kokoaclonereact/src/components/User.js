@@ -22,6 +22,7 @@ const UserAvater = styled.img`
 const UserTitle = styled.h4`
   font-weight: 600;
   font-size: 22px;
+  color: black;
 `
 
 const UserSubtitle = styled.span`

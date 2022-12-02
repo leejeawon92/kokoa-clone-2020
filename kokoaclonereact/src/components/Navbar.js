@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { FaUserAlt, FaComment, FaSearch,FaEllipsisH} from 'react-icons/fa'
-import { Link } from 'react-router-dom';
-
+import { Link, Outlet } from 'react-router-dom';
 
 const NavComponent = styled.nav`
   position: fixed;
@@ -21,14 +20,17 @@ const NavList = styled.ul`
 
 function Nav(){
   return(
-    <NavComponent>
-      <NavList>
-        <Link to='/'><FaUserAlt size={30}/></Link>
-        <Link to='/chats'><FaComment size={30}/></Link>
-        <Link to='/search'><FaSearch size={30}/></Link>
-        <Link to='/more'><FaEllipsisH size={30}/></Link>
-      </NavList>
-    </NavComponent>
+    <>
+      <NavComponent>
+        <NavList>
+          <Link to='/'><FaUserAlt size={30} color='black'/></Link>
+          <Link to='/chats'><FaComment size={30} color='black'/></Link>
+          <Link to='/search'><FaSearch size={30} color='black'/></Link>
+          <Link to='/more'><FaEllipsisH size={30} color='black'/></Link>
+        </NavList>
+        <Outlet/>
+      </NavComponent>
+    </>
   )
 }
 export default Nav;
