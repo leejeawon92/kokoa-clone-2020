@@ -14,9 +14,11 @@ function App() {
       <BrowserRouter>
         <Status/>
         <Routes>
-          <Route path='/'  element={<Friend/>} ></Route>
+          <Route path='/'  element={<Friend/>} ></Route>          
+          <Route path='settings'  element={<Settings/>} ></Route>
           <Route path='/chats' element={<Chats/>} ></Route>
           <Route path='/chats/chat' element={<Chat/>} ></Route>
+          <Route path='/chats/settings'  element={<Settings/>} ></Route>
           <Route path='/search'  element={<Search/>} ></Route>
           <Route path='/search/settings'  element={<Settings/>} ></Route>
           <Route path='/more'  element={<More/>} ></Route>
