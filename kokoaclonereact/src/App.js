@@ -24,7 +24,7 @@ function App() {
           <Route path='/more'  element={<More/>} ></Route>
           <Route path='/more/settings'  element={<Settings/>} ></Route>
         </Routes>
-        <Nav/>
+        {/* <Nav/> */}
       </BrowserRouter>
     </>
   );

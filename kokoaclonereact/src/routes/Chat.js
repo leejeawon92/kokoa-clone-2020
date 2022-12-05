@@ -1,12 +1,14 @@
 import styled from 'styled-components';
 import 라이언 from '../image/라이언.jpg'
 import AltHeader from '../components/AltHeader';
+import {AiOutlinePlusSquare} from 'react-icons/ai'
+import {FaSmileWink} from 'react-icons/fa'
+import {BsArrowUpCircle} from 'react-icons/bs'
+
 
 const ChatBody = styled.div`
   height: 11000vh;
 `
-
-
 const ChatMessage = styled.main`
   width: 100%;
   margin-top: 40px;
@@ -14,7 +16,6 @@ const ChatMessage = styled.main`
   flex-direction: column;
   align-items: center;
 `
-
 const TimeStamp = styled.div`
   color: white;
   background-color: black;
@@ -72,6 +73,41 @@ const MyMessage = styled(OpponentMessage)`
     margin-left: 5px;
   }
 `
+const Reply = styled.form`
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 25px;
+  box-sizing: border-box;
+  align-items: center;  
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
+`
+const Attachment = styled.button`
+  width: 10%;
+  background-color: transparent; 
+  border: 0;
+  al
+`
+const InputTools = styled.div`
+  width: 90%;
+  position: relative;
+  input {
+    padding: 15px;
+    width: 100%;
+    border-radius: 20px;
+    box-sizing: border-box;
+    opacity: 0.8;
+  }
+`
+
+const ToolsIcons = styled.div`
+  position: absolute;
+  right: 10px;
+  top: 7px;
+`
 
 function Chat (){
   return (
@@ -80,7 +116,6 @@ function Chat (){
         <AltHeader title='JW'/>
         <ChatMessage>
           <TimeStamp>2022년 12월 1일</TimeStamp>
-
           <OpponentMessage>
             <img src={라이언}></img>
             <MessageContent >
@@ -101,6 +136,19 @@ function Chat (){
             </MessageContent>
           </MyMessage>
         </ChatMessage>
+
+        <Reply>
+          <Attachment>
+            <AiOutlinePlusSquare size={30} />
+          </Attachment>
+          <InputTools>
+            <input type='text' placeholder="Write a message..." ></input>
+            <ToolsIcons>
+              <FaSmileWink size={30} />
+              <BsArrowUpCircle size={30} />
+            </ToolsIcons>
+          </InputTools>
+        </Reply>
       </ChatBody>
     </>
   )
