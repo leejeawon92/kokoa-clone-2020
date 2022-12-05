@@ -5,6 +5,7 @@ import Usercomponet from '../components/User'
 import Channelcomponet from '../components/Channel'
 import Screenheader from '../components/ScreenHeader'
 import jeawon from '../image/jeawon.jpg'
+import Nav from '../components/Navbar'
 
 const InfoDisplay = styled.a`
 text-align: center;
@@ -30,6 +31,7 @@ function Friend(){
       </InfoDisplay>
       <Usercomponet avatar={jeawon} name='jeawon' subtitle='열공모드' />
       <Channelcomponet />  
+      <Nav/>
     </>
   )
 }

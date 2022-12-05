@@ -5,6 +5,7 @@ import {ImAddressBook, } from 'react-icons/im'
 import {AiOutlineRightCircle, } from 'react-icons/ai'
 import developer from '../image/developer.PNG'
 import 그라버트 from '../image/그라버트.PNG'
+import Nav from '../components/Navbar';
 
 
 const Icons = styled.div`
@@ -171,6 +172,7 @@ function Search(){
           </PostPhoto>
         </OpenChatPost>
       </OpenChat>
+      <Nav/>
     </>
 
     )

@@ -1,5 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Nav from './components/Navbar';
+import { BrowserRouter, Route, Routes,   } from 'react-router-dom';
 import Status from './components/Statusbar';
 import Friend from './routes/Friend';
 import Chats from './routes/Chats';
@@ -11,8 +10,8 @@ import Chat from './routes/Chat';
 function App() {
   return (
     <>
+      <Status/>
       <BrowserRouter>
-        <Status/>
         <Routes>
           <Route path='/'  element={<Friend/>} ></Route>          
           <Route path='settings'  element={<Settings/>} ></Route>
@@ -24,7 +23,6 @@ function App() {
           <Route path='/more'  element={<More/>} ></Route>
           <Route path='/more/settings'  element={<Settings/>} ></Route>
         </Routes>
-        {/* <Nav/> */}
       </BrowserRouter>
     </>
   );

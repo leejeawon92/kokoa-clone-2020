@@ -6,6 +6,7 @@ import kakaogame from '../image/kakaogame.JPG'
 import kakaochannel from '../image/kakaochannel.JPG'
 import kakaopay from '../image/kakaopay.JPG'
 import styled from 'styled-components';
+import Nav from '../components/Navbar';
 
 const Icons = styled.div`
   display: flex;
@@ -89,6 +90,7 @@ function More(){
           </IconRow>
         </SuggestIcons>
       </Suggestions>
+      <Nav/>
     </>
   )
 }
