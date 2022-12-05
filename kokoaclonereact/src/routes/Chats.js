@@ -2,7 +2,7 @@ import Screenheader from '../components/ScreenHeader';
 import Usercomponet from '../components/User';
 import jeawon from '../image/jeawon.jpg'
 import alexandra from '../image/alexandra.jpg'
-import { Link , useNavigate  } from 'react-router-dom';
+import { Link   } from 'react-router-dom';
 
 function Chats(){
   return (

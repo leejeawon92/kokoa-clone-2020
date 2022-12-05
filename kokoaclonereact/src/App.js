@@ -23,9 +23,8 @@ function App() {
           <Route path='/search/settings'  element={<Settings/>} ></Route>
           <Route path='/more'  element={<More/>} ></Route>
           <Route path='/more/settings'  element={<Settings/>} ></Route>
-          
         </Routes>
-        <Nav />
+        <Nav/>
       </BrowserRouter>
     </>
   );

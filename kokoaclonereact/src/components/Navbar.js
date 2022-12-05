@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { FaUserAlt, FaComment, FaSearch,FaEllipsisH} from 'react-icons/fa'
-import { Link, Outlet } from 'react-router-dom';
+import { FaUserAlt, FaComment, FaSearch,FaEllipsisH, FaRegComment, FaRegUser} from 'react-icons/fa'
+import { Link, Outlet,useMatch, } from 'react-router-dom';
 
 const NavComponent = styled.nav`
   position: fixed;
@@ -19,12 +19,26 @@ const NavList = styled.ul`
 `
 
 function Nav(){
+  const chatsMatch = useMatch('/chats');
+  const rootMatch = useMatch('/');
   return(
     <>
       <NavComponent>
         <NavList>
-          <Link to='/'><FaUserAlt size={30} color='black'/></Link>
-          <Link to='/chats'><FaComment size={30} color='black'/></Link>
+          <Link to='/'>
+            {
+              (rootMatch ===null)
+                ? (<FaUserAlt size={30} color='black'/>)
+                : (<FaRegUser size={30} color='black'/>)
+            }
+          </Link>
+          <Link to='/chats'>
+            {
+              (chatsMatch === null) 
+                ? (<FaComment size={30} color='black'/>)
+                : (<FaRegComment size={30} color='black' />)
+            }
+          </Link>
           <Link to='/search'><FaSearch size={30} color='black'/></Link>
           <Link to='/more'><FaEllipsisH size={30} color='black'/></Link>
         </NavList>
