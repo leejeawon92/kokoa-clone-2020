@@ -6,6 +6,7 @@ import {AiOutlineRightCircle, } from 'react-icons/ai'
 import developer from '../image/developer.PNG'
 import 그라버트 from '../image/그라버트.PNG'
 import Nav from '../components/Navbar';
+import { useState } from 'react';
 
 
 const Icons = styled.div`
@@ -88,6 +89,9 @@ const PostMember = styled.div`
     margin: 0px 5px;
     background-color: rgba(0, 0, 0, 0.2);
   }
+  span:focus {
+    color: red;
+  }
 `
 const PostPhoto = styled.div`
   position: relative;
@@ -119,6 +123,12 @@ const PhotoHeart = styled.div`
 
 
 function Search(){
+  const [heartcount, setHeartcount] = useState(0);
+  const [heartclick, setHeartclick] = useState(true);
+  const onClick = () => {
+    setHeartcount(heartcount+1);
+    setHeartclick((prev => !prev))
+  }
   return (
     <>
       <Screenheader title='Search'/> 
@@ -166,8 +176,8 @@ function Search(){
           <PostPhoto>
             <img src={그라버트} />
             <PhotoHeart>
-              <FaHeart></FaHeart>
-              <span>123</span>
+              <FaHeart color={heartclick ? 'white' : 'red'} onClick={onClick} ></FaHeart>
+              <span>{heartcount}</span>
             </PhotoHeart>
           </PostPhoto>
         </OpenChatPost>
