@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { AiOutlineWifi, AiFillThunderbolt,  } from 'react-icons/ai';
 import {CiBatteryFull} from 'react-icons/ci'
+import Moment from 'react-moment';
 
 const StatusBar = styled.div`
   width: 33%;
@@ -43,7 +44,7 @@ function Status(){
       </LeftColumn>
 
       <CenterColumn>
-        <span>17:00</span>
+        <Moment format='HH:mm:ss' interval={1000}></Moment>
       </CenterColumn>
 
       <RightColumn>
