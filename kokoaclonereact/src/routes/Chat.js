@@ -4,10 +4,13 @@ import AltHeader from '../components/AltHeader';
 import {AiOutlinePlusSquare} from 'react-icons/ai'
 import {FaSmileWink} from 'react-icons/fa'
 import {BsArrowUpCircle} from 'react-icons/bs'
-
+import Keyboard from 'react-simple-keyboard'
+import { useState, useRef } from 'react';
+import 'react-simple-keyboard/build/css/index.css'
+import '../css/index.css'
+import { useSubmit } from 'react-router-dom';
 
 const ChatBody = styled.div`
-  height: 11000vh;
 `
 const ChatMessage = styled.main`
   width: 100%;
@@ -74,8 +77,9 @@ const MyMessage = styled(OpponentMessage)`
   }
 `
 const Reply = styled.form`
-  position: fixed;
-  bottom: 0px;
+  onsubmit: "return false";
+  position: relative;
+  top: ${(props) => props.focusInput ? '280px'  : '520px'};
   width: 100%;
   background-color: white;
   display: flex;
@@ -83,13 +87,14 @@ const Reply = styled.form`
   padding: 5px 25px;
   box-sizing: border-box;
   align-items: center;  
-  border-top: 1px solid rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.3);
+
+  
 `
 const Attachment = styled.button`
   width: 10%;
   background-color: transparent; 
   border: 0;
-  al
 `
 const InputTools = styled.div`
   width: 90%;
@@ -109,47 +114,106 @@ const ToolsIcons = styled.div`
   top: 7px;
 `
 
+
+
 function Chat (){
+  const [input, setInput] = useState('');
+  const [layout, setLayout] = useState("default");
+  const keyboard = useRef();
+  const [inputcheck ,setinputCheck] = useState(false);
+  const [keyboardcheck ,setKeyboardcheck] = useState(true);
+  // const submit = useSubmit();
+
+  const onChangeKeyboard = (input) => {
+    setInput(input);
+    setinputCheck(true);
+    console.log("Input 변경:", input);
+  };
+
+  const handleShift = () => {
+    const newLayoutName = layout === "default" ? "shift" : "default";
+    console.log("newLayoutName =>", newLayoutName);
+    setLayout(newLayoutName);
+  };
+
+  const onKeyPress = (button) => {
+    console.log("버튼 클릭: ", button);
+
+    // Shift및 Caps Lock 버튼을 처리하려는 경우
+    if (button === "{shift}" || button === "{lock}") handleShift();
+  };
+
+  const onChangeInput = (event) => {
+    const input = event.target.value;
+    setInput(input);
+    setKeyboardcheck(false);
+    keyboard.current.setInput(input);
+  };
+
+  const onSubmit = () => {
+    console.log('호출');
+    return true;
+  }
+  console.log(input);
+
+
   return (
     <>
-      <ChatBody>
-        <AltHeader title='JW'/>
-        <ChatMessage>
-          <TimeStamp>2022년 12월 1일</TimeStamp>
-          <OpponentMessage>
-            <img src={라이언}></img>
-            <MessageContent >
-              <MessageAuthor>jw</MessageAuthor>
-              <MessageInfo className='opponent'>
-                <span className='content'>얄리얄리얄랑셩</span>
-                <span className='time'>21:21</span>
-              </MessageInfo>
-            </MessageContent>
-          </OpponentMessage>
+      <AltHeader title='JW'/>
+      <ChatMessage>
+        <TimeStamp>2022년 12월 1일</TimeStamp>
+        <OpponentMessage>
+          <img src={라이언}></img>
+          <MessageContent >
+            <MessageAuthor>jw</MessageAuthor>
+            <MessageInfo className='opponent'>
+              <span className='content'>얄리얄리얄랑셩</span>
+              <span className='time'>21:21</span>
+            </MessageInfo>
+          </MessageContent>
+        </OpponentMessage>
 
-          <MyMessage>
-            <MessageContent >
-              <MessageInfo className='me'>
-                <span className='content'>얄라리얄라</span>
-                <span className='time'>21:21</span>
-              </MessageInfo>
-            </MessageContent>
-          </MyMessage>
-        </ChatMessage>
+        <MyMessage>
+          <MessageContent >
+            <MessageInfo className='me'>
+              <span className='content'>얄라리얄라</span>
+              <span className='time'>21:21</span>
+            </MessageInfo>
+          </MessageContent>
+        </MyMessage>
+      </ChatMessage>
 
-        <Reply>
-          <Attachment>
-            <AiOutlinePlusSquare size={30} />
-          </Attachment>
-          <InputTools>
-            <input type='text' placeholder="Write a message..." ></input>
-            <ToolsIcons>
-              <FaSmileWink size={30} />
-              <BsArrowUpCircle size={30} />
-            </ToolsIcons>
-          </InputTools>
-        </Reply>
-      </ChatBody>
+      <Reply focusInput={keyboardcheck} >
+        <Attachment>
+          <AiOutlinePlusSquare size={30} />
+        </Attachment>
+        <InputTools>
+          <input 
+            className="keyboardInput"
+            type='text' 
+            placeholder="Write a message..."               
+            value={input }
+            disabled={inputcheck ? true : false}              
+            onChange={onChangeInput}
+          ></input>
+          <ToolsIcons>
+            <FaSmileWink size={30} />
+            <BsArrowUpCircle size={30} />
+          </ToolsIcons>
+        </InputTools>
+      </Reply>
+
+      { keyboardcheck || input==='' ?        
+          <Keyboard
+            keyboardRef={(r) => (keyboard.current = r)} 
+            layoutName={layout} 
+            onChange={onChangeKeyboard}
+            onKeyPress={onKeyPress}
+          />
+        : 
+          <></>
+        }
+
     </>
   )
 }
