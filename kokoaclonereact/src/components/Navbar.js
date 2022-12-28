@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { FaUserAlt, FaComment, FaSearch,FaEllipsisH, FaRegComment, FaRegUser} from 'react-icons/fa'
 import { Link, Outlet,useMatch, } from 'react-router-dom';
+import { motion } from "framer-motion"
+import { memo } from 'react';
 
 const NavComponent = styled.nav`
   position: fixed;
@@ -18,9 +20,30 @@ const NavList = styled.ul`
   justify-content: space-between;
 `
 
-function Nav(){
+const MessageTotalCount = styled(motion.div)`
+  position:  absolute;
+  top: -16px;
+  right: -10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: tomato;
+  width: 30px;
+  height: 30px;
+  border-radius:15px;
+  font-size: 18px;
+  color: black;
+`
+
+const Animate = {
+  start : {scale: 0},
+  end : {scale:1, rotateZ:360, transition: {type:"spring", stiffness:100, delay:0.5}}
+}
+
+function Nav({total}){
   const chatsMatch = useMatch('/chats');
   const rootMatch = useMatch('/');
+
   return(
     <>
       <NavComponent>
@@ -32,11 +55,23 @@ function Nav(){
                 : (<FaRegUser size={30} color='black'/>)
             }
           </Link>
-          <Link to='/chats'>
+          <Link to='/chats' style={{ textDecoration: "none",  position: 'relative' }}>
             {
               (chatsMatch === null) 
-                ? (<FaComment size={30} color='black'/>)
-                : (<FaRegComment size={30} color='black' />)
+                ? 
+                (<>
+                  <FaComment size={30} color='black'/>
+                  <MessageTotalCount  variants={Animate} initial='start' animate='end' >
+                    {total}
+                  </MessageTotalCount>
+                </>)                  
+                :
+                (<>
+                  <FaRegComment size={30} color='black' />
+                  <MessageTotalCount variants={Animate} initial='start' animate='end' >
+                    {total}
+                  </MessageTotalCount>
+                </>)    
             }
           </Link>
           <Link to='/search'><FaSearch size={30} color='black'/></Link>
@@ -47,4 +82,4 @@ function Nav(){
     </>
   )
 }
-export default Nav;
+export default memo(Nav) ;

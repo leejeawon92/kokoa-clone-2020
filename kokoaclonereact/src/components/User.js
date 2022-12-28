@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import styled from "styled-components";
 
 
@@ -72,4 +73,4 @@ function Usercomponet({avatar, name, subtitle, time, count  }){
   )
 }
 
-export default Usercomponet;
+export default memo(Usercomponet) ;

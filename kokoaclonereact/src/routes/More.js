@@ -7,6 +7,8 @@ import kakaochannel from '../image/kakaochannel.JPG'
 import kakaopay from '../image/kakaopay.JPG'
 import styled from 'styled-components';
 import Nav from '../components/Navbar';
+import { useRecoilValue } from 'recoil'
+import { messageCount, sumCount } from '../atoms'
 
 const Icons = styled.div`
   display: flex;
@@ -50,6 +52,8 @@ const SuggestIcons = styled.div`
 `
 
 function More(){
+  const msgArr = useRecoilValue(messageCount);
+  const msgtatal = msgArr[0]+msgArr[1];
   return (
     <>
       <Screenheader title='More'></Screenheader>
@@ -90,7 +94,7 @@ function More(){
           </IconRow>
         </SuggestIcons>
       </Suggestions>
-      <Nav/>
+      <Nav total={msgtatal ? msgtatal : 0}/>
     </>
   )
 }

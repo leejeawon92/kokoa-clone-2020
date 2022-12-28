@@ -6,6 +6,9 @@ import Channelcomponet from '../components/Channel'
 import Screenheader from '../components/ScreenHeader'
 import jeawon from '../image/jeawon.jpg'
 import Nav from '../components/Navbar'
+import { useRecoilValue } from 'recoil'
+import { messageCount, sumCount } from '../atoms'
+import { memo } from 'react'
 
 const InfoDisplay = styled.a`
 text-align: center;
@@ -21,6 +24,8 @@ margin-top: -15px;
 `
 
 function Friend(){
+  const msgArr = useRecoilValue(messageCount);
+  const msgtatal = msgArr[0]+msgArr[1];
   return(
     <>
       <Screenheader title='Friend'/> 
@@ -31,8 +36,8 @@ function Friend(){
       </InfoDisplay>
       <Usercomponet avatar={jeawon} name='jeawon' subtitle='열공모드' />
       <Channelcomponet />  
-      <Nav/>
+      <Nav total={msgtatal ? msgtatal : 0} />
     </>
   )
 }
-export default Friend;
+export default Friend ;

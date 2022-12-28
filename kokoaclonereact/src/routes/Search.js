@@ -7,7 +7,8 @@ import developer from '../image/developer.PNG'
 import 그라버트 from '../image/그라버트.PNG'
 import Nav from '../components/Navbar';
 import { useState } from 'react';
-
+import { useRecoilValue } from 'recoil'
+import { messageCount, sumCount } from '../atoms'
 
 const Icons = styled.div`
   display: flex;
@@ -125,6 +126,8 @@ const PhotoHeart = styled.div`
 function Search(){
   const [heartcount, setHeartcount] = useState(0);
   const [heartclick, setHeartclick] = useState(true);
+  const msgArr = useRecoilValue(messageCount);
+  const msgtatal = msgArr[0]+msgArr[1];
   const onClick = () => {
     setHeartcount(heartcount+1);
     setHeartclick((prev => !prev))
@@ -182,7 +185,7 @@ function Search(){
           </PostPhoto>
         </OpenChatPost>
       </OpenChat>
-      <Nav/>
+      <Nav total={msgtatal ? msgtatal : 0} />
     </>
 
     )
