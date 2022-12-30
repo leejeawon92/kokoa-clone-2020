@@ -75,6 +75,7 @@ const MyMessage = styled(OpponentMessage)`
     margin-right: 0px;
     margin-left: 5px;
   }
+  margin-bottom: 20px;
 `
 const Reply = styled.form`
   onsubmit: "return false";
@@ -181,7 +182,26 @@ function Chat (){
             </MessageInfo>
           </MessageContent>
         </MyMessage>
+
+        <MyMessage>
+          <MessageContent >
+            <MessageInfo className='me'>
+              <span className='content'>얄라리얄라</span>
+              <span className='time'>21:21</span>
+            </MessageInfo>
+          </MessageContent>
+        </MyMessage>
+
+        <MyMessage>
+          <MessageContent >
+            <MessageInfo className='me'>
+              <span className='content'>얄라리얄라</span>
+              <span className='time'>21:21</span>
+            </MessageInfo>
+          </MessageContent>
+        </MyMessage>
       </ChatMessage>
+      
 
       <Reply focusInput={keyboardcheck} >
         <Attachment>

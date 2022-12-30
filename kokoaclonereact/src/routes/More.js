@@ -51,7 +51,7 @@ const Row = styled(motion.div)`
 `;
 const Box = styled(motion.div)`
   background-color: white;
-  background-image: url(${(props) => props.bgBanner});
+  background-image: url(${(props) => props.bgbanner});
   background-size: cover;
   background-position: center center;
   height: 200px;
@@ -164,7 +164,7 @@ function More(){
               key={index}
               >
                 {bannerImg.slice(offset * index, offset * index + offset).map((i)=>(
-                  <Box bgBanner={i} key={i}>{}</Box>
+                  <Box bgbanner={i} key={i}>{}</Box>
                 ))}
             </Row>
           </AnimatePresence>
