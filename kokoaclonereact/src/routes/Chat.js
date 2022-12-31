@@ -9,6 +9,8 @@ import { useState, useRef } from 'react';
 import 'react-simple-keyboard/build/css/index.css'
 import '../css/index.css'
 import { useSubmit } from 'react-router-dom';
+import { useEffect } from 'react';
+import io from 'socket.io-client';
 
 const ChatBody = styled.div`
 `
@@ -123,39 +125,48 @@ function Chat (){
   const keyboard = useRef();
   const [inputcheck ,setinputCheck] = useState(false);
   const [keyboardcheck ,setKeyboardcheck] = useState(true);
-  // const submit = useSubmit();
-
-  const onChangeKeyboard = (input) => {
-    setInput(input);
-    setinputCheck(true);
-    console.log("Input 변경:", input);
-  };
-
-  const handleShift = () => {
-    const newLayoutName = layout === "default" ? "shift" : "default";
-    console.log("newLayoutName =>", newLayoutName);
-    setLayout(newLayoutName);
-  };
-
-  const onKeyPress = (button) => {
-    console.log("버튼 클릭: ", button);
-
-    // Shift및 Caps Lock 버튼을 처리하려는 경우
-    if (button === "{shift}" || button === "{lock}") handleShift();
-  };
 
   const onChangeInput = (event) => {
     const input = event.target.value;
     setInput(input);
-    setKeyboardcheck(false);
-    keyboard.current.setInput(input);
   };
 
-  const onSubmit = () => {
-    console.log('호출');
-    return true;
-  }
-  console.log(input);
+  const socket = io('localhost:5000');
+  console.log(socket);
+  socket.emit('메시지 보내기', 'ㅁㄴㅇㅁㄴㅇ')
+
+  // const submit = useSubmit();
+  // const onChangeKeyboard = (input) => {
+  //   setInput(input);
+  //   setinputCheck(true);
+  //   console.log("Input 변경:", input);
+  // };
+
+  // const handleShift = () => {
+  //   const newLayoutName = layout === "default" ? "shift" : "default";
+  //   console.log("newLayoutName =>", newLayoutName);
+  //   setLayout(newLayoutName);
+  // };
+
+  // const onKeyPress = (button) => {
+  //   console.log("버튼 클릭: ", button);
+
+  //   // Shift및 Caps Lock 버튼을 처리하려는 경우
+  //   if (button === "{shift}" || button === "{lock}") handleShift();
+  // };
+
+  // const onChangeInput = (event) => {
+  //   const input = event.target.value;
+  //   setInput(input);
+  //   setKeyboardcheck(false);
+  //   keyboard.current.setInput(input);
+  // };
+
+  // const onSubmit = () => {
+  //   console.log('호출');
+  //   return true;
+  // }
+  // console.log(input);
 
 
   return (
@@ -201,9 +212,8 @@ function Chat (){
           </MessageContent>
         </MyMessage>
       </ChatMessage>
-      
 
-      <Reply focusInput={keyboardcheck} >
+      <Reply >
         <Attachment>
           <AiOutlinePlusSquare size={30} />
         </Attachment>
@@ -222,8 +232,29 @@ function Chat (){
           </ToolsIcons>
         </InputTools>
       </Reply>
+      
+{/* 
+      <Reply focusInput={keyboardcheck} >
+        <Attachment>
+          <AiOutlinePlusSquare size={30} />
+        </Attachment>
+        <InputTools>
+          <input 
+            className="keyboardInput"
+            type='text' 
+            placeholder="Write a message..."               
+            value={input }
+            disabled={inputcheck ? true : false}              
+            onChange={onChangeInput}
+          ></input>
+          <ToolsIcons>
+            <FaSmileWink size={30} />
+            <BsArrowUpCircle size={30} />
+          </ToolsIcons>
+        </InputTools>
+      </Reply> */}
 
-      { keyboardcheck || input==='' ?        
+      {/* { keyboardcheck || input==='' ?        
           <Keyboard
             keyboardRef={(r) => (keyboard.current = r)} 
             layoutName={layout} 
@@ -232,8 +263,8 @@ function Chat (){
           />
         : 
           <></>
-        }
-
+        } */}
+      
     </>
   )
 }
