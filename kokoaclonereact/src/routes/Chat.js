@@ -66,15 +66,21 @@ const ToolsIcons = styled.div`
 
 
 function Chat (){
-  const [input, setInput] = useState('');
+  const [inputValue, setInputValue] = useState('');
+  const [formValue, setFormValue] = useState('');
   const onChangeInput = (event) => {
-    const input = event.target.value;
-    setInput(input);
+    setInputValue(event.target.value);
   };
 
-  const socket = io('localhost:5000');
-  console.log(socket);
-  socket.emit('메시지 보내기', 'ㅁㄴㅇㅁㄴㅇ')
+  const onSubmit = (event) => {
+    setFormValue(event.target.messageInput.value);
+    setInputValue('')
+    event.preventDefault();
+  }
+
+  // const socket = io('localhost:5000');
+  // console.log(socket);
+  // socket.emit('메시지 보내기', 'ㅁㄴㅇㅁㄴㅇ')
 
   return (
     <>
@@ -82,20 +88,21 @@ function Chat (){
       <ChatMessage>
         <TimeStamp><Moment format='YYYY년 MM월 DD일' interval={1000}></Moment></TimeStamp>
         <OtherMessageComponent />
-        <MyMessageComponent />
+        <MyMessageComponent text={formValue} />
       </ChatMessage>
 
-      <Reply >
+      <Reply onSubmit={onSubmit} >
         <Attachment>
           <AiOutlinePlusSquare size={30} />
         </Attachment>
         <InputTools>
           <input 
-            className="messageInput"
+            name="messageInput"
             type='text' 
             placeholder="Write a message..."               
-            value={input }
+            value={inputValue}
             onChange={onChangeInput}
+            
           ></input>
           <ToolsIcons>
             <FaSmileWink size={30} />

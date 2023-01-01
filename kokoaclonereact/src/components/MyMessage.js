@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-
+import Moment from 'react-moment';
 
 const OtherMessage = styled.div`
   width: 100%;
@@ -48,17 +48,21 @@ align-items: flex-end;
 }
 `
 
-function MyMessageComponent () {
+function MyMessageComponent ({text}) {
   return (
     <>
-      <MyMessage>
-        <MessageContent >
-          <MessageInfo className='me'>
-            <span className='content'>얄라리얄라</span>
-            <span className='time'>21:21</span>
-          </MessageInfo>
-        </MessageContent>
-      </MyMessage>
+      { text ?
+        <MyMessage>
+          <MessageContent >
+            <MessageInfo className='me'>
+              <span className='content'>{text}</span>
+              <span className='time'><Moment format='HH:mm' interval={1000}></Moment></span>
+            </MessageInfo>
+          </MessageContent>
+        </MyMessage>
+        : 
+        <></>
+      }
     </>
   )
 }
