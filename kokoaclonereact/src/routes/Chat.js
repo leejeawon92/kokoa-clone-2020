@@ -31,9 +31,7 @@ const MessageInput  = styled.footer`
   position: fixed;
   width: 100%;
   bottom: 0;
-
 `
-
 const Reply = styled.form`
   width: 100%;
   background-color: white;
@@ -73,9 +71,11 @@ function Chat (){
   const onChangeInput = (event) => {
     setInputValue(event.target.value);
   };
-// event.target.messageInput.value
+
   const onSubmit = (event) => {
-    setFormValue( [ ...formValue, event.target.messageInput.value]);
+    if(event.target.messageInput.value !== ''){
+      setFormValue( [ ...formValue, event.target.messageInput.value]);
+    }    
     console.log(formValue);
     setInputValue('')
     event.preventDefault();
@@ -93,7 +93,7 @@ function Chat (){
       <ChatMessage>
         <TimeStamp><Moment format='YYYY년 MM월 DD일' interval={1000}></Moment></TimeStamp>
         <OtherMessageComponent />
-        {formValue.map((text) => (<MyMessageComponent text={text} />))}
+        {formValue.map((text) => (<MyMessageComponent key={text} text={text} />))}
       </ChatMessage>
 
       <MessageInput>
