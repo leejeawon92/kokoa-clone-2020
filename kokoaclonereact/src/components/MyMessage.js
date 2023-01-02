@@ -51,12 +51,12 @@ align-items: flex-end;
 function MyMessageComponent ({text}) {
   return (
     <>
-      { text ?
+      { text !==0  ?
         <MyMessage>
           <MessageContent >
             <MessageInfo className='me'>
               <span className='content'>{text}</span>
-              <span className='time'><Moment format='HH:mm' interval={1000}></Moment></span>
+              <span className='time'><Moment format='HH:mm'></Moment></span>
             </MessageInfo>
           </MessageContent>
         </MyMessage>

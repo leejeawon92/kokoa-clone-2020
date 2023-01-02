@@ -4,16 +4,14 @@ import AltHeader from '../components/AltHeader';
 import {AiOutlinePlusSquare} from 'react-icons/ai'
 import {FaSmileWink} from 'react-icons/fa'
 import {BsArrowUpCircle} from 'react-icons/bs'
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import 'react-simple-keyboard/build/css/index.css'
 import '../css/index.css'
 import io from 'socket.io-client';
 import OtherMessageComponent from '../components/OtherMessage';
 import MyMessageComponent from '../components/MyMessage';
+import { useEffect } from 'react';
 
-
-const ChatBody = styled.div`
-`
 const ChatMessage = styled.main`
   width: 100%;
   margin-top: 40px;
@@ -29,10 +27,14 @@ const TimeStamp = styled.div`
   border-radius: 25px;
   margin-bottom: 25px;
 `
+const MessageInput  = styled.footer`
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+
+`
+
 const Reply = styled.form`
-  onsubmit: "return false";
-  position: relative;
-  top: ${(props) => props.focusInput ? '280px'  : '520px'};
   width: 100%;
   background-color: white;
   display: flex;
@@ -67,20 +69,23 @@ const ToolsIcons = styled.div`
 
 function Chat (){
   const [inputValue, setInputValue] = useState('');
-  const [formValue, setFormValue] = useState('');
+  const [formValue, setFormValue] = useState([]);
   const onChangeInput = (event) => {
     setInputValue(event.target.value);
   };
-
+// event.target.messageInput.value
   const onSubmit = (event) => {
-    setFormValue(event.target.messageInput.value);
+    setFormValue( [ ...formValue, event.target.messageInput.value]);
+    console.log(formValue);
     setInputValue('')
     event.preventDefault();
   }
 
-  // const socket = io('localhost:5000');
-  // console.log(socket);
-  // socket.emit('메시지 보내기', 'ㅁㄴㅇㅁㄴㅇ')
+  useEffect(()=> {
+    const socket = io('localhost:5000');
+    console.log(socket);
+    socket.emit('메시지 보내기', 'ㅁㄴㅇㅁㄴㅇ')
+  }, [])
 
   return (
     <>
@@ -88,28 +93,30 @@ function Chat (){
       <ChatMessage>
         <TimeStamp><Moment format='YYYY년 MM월 DD일' interval={1000}></Moment></TimeStamp>
         <OtherMessageComponent />
-        <MyMessageComponent text={formValue} />
+        {formValue.map((text) => (<MyMessageComponent text={text} />))}
       </ChatMessage>
 
-      <Reply onSubmit={onSubmit} >
-        <Attachment>
-          <AiOutlinePlusSquare size={30} />
-        </Attachment>
-        <InputTools>
-          <input 
-            name="messageInput"
-            type='text' 
-            placeholder="Write a message..."               
-            value={inputValue}
-            onChange={onChangeInput}
-            
-          ></input>
-          <ToolsIcons>
-            <FaSmileWink size={30} />
-            <BsArrowUpCircle size={30} />
-          </ToolsIcons>
-        </InputTools>
-      </Reply>   
+      <MessageInput>
+        <Reply onSubmit={onSubmit} >
+          <Attachment>
+            <AiOutlinePlusSquare size={30} />
+          </Attachment>
+          <InputTools>
+            <input 
+              name="messageInput"
+              type='text' 
+              placeholder="Write a message..."               
+              value={inputValue}
+              onChange={onChangeInput}
+              
+            ></input>
+            <ToolsIcons>
+              <FaSmileWink size={30} />
+              <BsArrowUpCircle size={30} />
+            </ToolsIcons>
+          </InputTools>
+        </Reply>   
+      </MessageInput>
     </>
   )
 }
