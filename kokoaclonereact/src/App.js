@@ -6,6 +6,9 @@ import Search from './routes/Search';
 import More from './routes/More';
 import Settings from './routes/Settings';
 import Chat from './routes/Chat';
+import io from 'socket.io-client';
+
+const socket = io('localhost:5000', {reconnection: false});
 
 function App() {
   return (
@@ -16,7 +19,7 @@ function App() {
           <Route path='/'  element={<Friend/>} ></Route>          
           <Route path='settings'  element={<Settings/>} ></Route>
           <Route path='/chats' element={<Chats/>} ></Route>
-          <Route path='/chats/chat' element={<Chat/>} ></Route>
+          <Route path='/chats/chat' element={<Chat socket={socket}/>} ></Route>
           <Route path='/chats/settings'  element={<Settings/>} ></Route>
           <Route path='/search'  element={<Search/>} ></Route>
           <Route path='/search/settings'  element={<Settings/>} ></Route>

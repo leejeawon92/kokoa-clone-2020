@@ -19,10 +19,21 @@ app.get('*',(request, response) =>{
     response.sendFile( path.join(path.resolve(), 'build/index.html'))
 })
 
+let users = [];
+
 wsServer.on('connection', (socket) =>{
-    socket.on('메시지 보내기', (msg)=> {
-        console.log(msg);
-    })
+    if(users.length > 3){
+        users =[]
+    }
+    users.push(socket.id)
+    console.log(`users: ${users}`);
+    socket.on('send-message', (message) => {
+        console.log(`message: ${message}`);
+        socket.broadcast.emit('chat-message', {
+            message: message,
+            user: socket.id,
+        });
+    });
 })
 
 

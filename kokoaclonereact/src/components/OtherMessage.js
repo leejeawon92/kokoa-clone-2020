@@ -1,3 +1,4 @@
+import Moment from 'react-moment';
 import styled from 'styled-components';
 import 라이언 from '../image/라이언.jpg'
 
@@ -36,20 +37,24 @@ const MessageInfo = styled.div`
     font-size: 13px;
   }
 `
-function OtherMessageComponent() {
+function OtherMessageComponent({text}) {
 
   return (
     <>
-      <OtherMessage>
-        <img src={라이언}></img>
-        <MessageContent >
-          <MessageAuthor>jw</MessageAuthor>
-          <MessageInfo className='opponent'>
-            <span className='content'>얄리얄리얄랑셩</span>
-            <span className='time'>21:21</span>
-          </MessageInfo>
-        </MessageContent>
-      </OtherMessage>
+      { text !==0  ?
+        <OtherMessage>
+          <img src={라이언}></img>
+          <MessageContent >
+            <MessageAuthor>상대방</MessageAuthor>
+            <MessageInfo className='opponent'>
+              <span className='content'>얄리얄리얄랑셩</span>
+              <span className='time'><Moment format='HH:mm'></Moment></span>
+            </MessageInfo>
+          </MessageContent>
+        </OtherMessage>
+        : 
+        <></>
+      }
     </>
   )
 }

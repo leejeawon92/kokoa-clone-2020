@@ -7,7 +7,6 @@ import {BsArrowUpCircle} from 'react-icons/bs'
 import { useState } from 'react';
 import 'react-simple-keyboard/build/css/index.css'
 import '../css/index.css'
-import io from 'socket.io-client';
 import OtherMessageComponent from '../components/OtherMessage';
 import MyMessageComponent from '../components/MyMessage';
 import { useEffect } from 'react';
@@ -65,7 +64,7 @@ const ToolsIcons = styled.div`
 `
 
 
-function Chat (){
+function Chat ({socket}){
   const [inputValue, setInputValue] = useState('');
   const [formValue, setFormValue] = useState([]);
   const onChangeInput = (event) => {
@@ -76,23 +75,27 @@ function Chat (){
     if(event.target.messageInput.value !== ''){
       setFormValue( [ ...formValue, event.target.messageInput.value]);
     }    
-    console.log(formValue);
     setInputValue('')
     event.preventDefault();
   }
 
   useEffect(()=> {
-    const socket = io('localhost:5000');
-    console.log(socket);
-    socket.emit('메시지 보내기', 'ㅁㄴㅇㅁㄴㅇ')
-  }, [])
+    socket.emit('send-message', formValue)
+    socket.on('chat-message', (data) => {
+      console.log(data);
+      console.log(data.user);
+    });
+  }, [formValue])
+  
+
 
   return (
     <>
       <AltHeader title='JW'/>
       <ChatMessage>
         <TimeStamp><Moment format='YYYY년 MM월 DD일' interval={1000}></Moment></TimeStamp>
-        <OtherMessageComponent />
+        <OtherMessageComponent /> 
+        {/* {formValue.map((text) => (<OtherMessageComponent key={text} text={text} />))} */}
         {formValue.map((text) => (<MyMessageComponent key={text} text={text} />))}
       </ChatMessage>
 
