@@ -10,6 +10,7 @@ import '../css/index.css'
 import OtherMessageComponent from '../components/OtherMessage';
 import MyMessageComponent from '../components/MyMessage';
 import { useEffect } from 'react';
+import { useRef } from 'react';
 
 const ChatMessage = styled.main`
   width: 100%;
@@ -66,27 +67,31 @@ const ToolsIcons = styled.div`
 
 function Chat ({socket}){
   const [inputValue, setInputValue] = useState('');
-  const [formValue, setFormValue] = useState([]);
+  const [myValue, setMyValue] = useState([]);
+  const [otherValue, setOtherValue] = useState([]);
+  
   const onChangeInput = (event) => {
     setInputValue(event.target.value);
   };
 
   const onSubmit = (event) => {
     if(event.target.messageInput.value !== ''){
-      setFormValue( [ ...formValue, event.target.messageInput.value]);
+      setMyValue( [ ...myValue, event.target.messageInput.value]);
     }    
     setInputValue('')
     event.preventDefault();
   }
 
-  useEffect(()=> {
-    socket.emit('send-message', formValue)
-    socket.on('chat-message', (data) => {
-      console.log(data);
-      console.log(data.user);
-    });
-  }, [formValue])
+  socket.on("connect", () => {
+    console.log(socket.id); 
+  });
   
+  useEffect(()=> {
+    socket.emit('send-message', myValue)
+    socket.on('chat-message', (data) => {
+      setOtherValue(data.message);
+    });
+  }, [myValue])
 
 
   return (
@@ -94,9 +99,8 @@ function Chat ({socket}){
       <AltHeader title='JW'/>
       <ChatMessage>
         <TimeStamp><Moment format='YYYY년 MM월 DD일' interval={1000}></Moment></TimeStamp>
-        <OtherMessageComponent /> 
-        {/* {formValue.map((text) => (<OtherMessageComponent key={text} text={text} />))} */}
-        {formValue.map((text) => (<MyMessageComponent key={text} text={text} />))}
+        {otherValue.map((text) => (<OtherMessageComponent key={Math.random()} text={text} />))}
+        {myValue.map((text) => (<MyMessageComponent key={Math.random()} text={text} />))}
       </ChatMessage>
 
       <MessageInput>

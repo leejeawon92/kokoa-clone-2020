@@ -31,7 +31,7 @@ wsServer.on('connection', (socket) =>{
         console.log(`message: ${message}`);
         socket.broadcast.emit('chat-message', {
             message: message,
-            user: socket.id,
+            user: socket.id
         });
     });
 })

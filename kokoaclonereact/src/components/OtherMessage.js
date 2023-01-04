@@ -38,7 +38,7 @@ const MessageInfo = styled.div`
   }
 `
 function OtherMessageComponent({text}) {
-
+  console.log(text);
   return (
     <>
       { text !==0  ?
@@ -47,7 +47,7 @@ function OtherMessageComponent({text}) {
           <MessageContent >
             <MessageAuthor>상대방</MessageAuthor>
             <MessageInfo className='opponent'>
-              <span className='content'>얄리얄리얄랑셩</span>
+              <span className='content'>{text}</span>
               <span className='time'><Moment format='HH:mm'></Moment></span>
             </MessageInfo>
           </MessageContent>
