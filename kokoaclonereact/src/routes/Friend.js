@@ -1,42 +1,100 @@
 import styled from 'styled-components'
-import {AiOutlineRightCircle} from 'react-icons/ai'
+import {AiOutlineRightCircle, AiOutlinePlusSquare} from 'react-icons/ai'
 import { FaInfoCircle} from 'react-icons/fa'
 import Usercomponet from '../components/User'
-import Channelcomponet from '../components/Channel'
+import Channelcomponet from '../components/PlusFrined'
 import Screenheader from '../components/ScreenHeader'
 import jeawon from '../image/jeawon.jpg'
 import Nav from '../components/Navbar'
 import { useRecoilValue } from 'recoil'
-import { messageCount, sumCount } from '../atoms'
-import { memo } from 'react'
+import { messageCount } from '../atoms'
+import {MdArrowUpward} from 'react-icons/md'
+import { useState } from 'react'
+import PlusFriend from '../components/PlusFrined'
+import { AnimatePresence, motion } from 'framer-motion'
+
+const FriendComponent = styled.div`
+  position: relative;
+`
 
 const InfoDisplay = styled.a`
-text-align: center;
-display: block; 
-background-color: #fafafa;
-padding: 15px 10px;
-font-size: 20px;
-margin-bottom: 10px;
-margin-top: -15px;
-.info {
-  margin-right: 5px;
-}
+  text-align: center;
+  display: block; 
+  background-color: #fafafa;
+  padding: 15px 10px;
+  font-size: 20px;
+  margin-bottom: 10px;
+  margin-top: -15px;
+  .info {
+    margin-right: 5px;
+  }
+`
+const Channel = styled.div`
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  color: rgba(0, 0, 0, 0.8);
+
+`
+const ChannelHeader = styled.div`
+  margin-top: 10px;  
+  span {
+    font-size : 18px;
+  }
+`
+const AddFriend = styled(motion.div)`
+  position: absolute;
+  background-color : rgba(0, 0, 0, 0.8);
+  width: 500px;
+  height: 500px;
+  left: ${props => props.left}px;
+  top: ${props => props.top}px;
+  z-index: 99;
 `
 
 function Friend(){
   const msgArr = useRecoilValue(messageCount);
   const msgtatal = msgArr[0]+msgArr[1];
+  const [clicked, setClick] = useState(false);
+  const toggle = () => setClick((prev) => !prev);
+
+  let top = (window.innerHeight /2) - (500/2)
+  let left  = (window.innerWidth /2) - (500/2)
   return(
     <>
-      <Screenheader title='Friend'/> 
-      <InfoDisplay>
-        <FaInfoCircle className='info' />
-        Friends Names Display 
-        <AiOutlineRightCircle/>
-      </InfoDisplay>
-      <Usercomponet avatar={jeawon} name='jeawon' subtitle='열공모드' />
-      <Channelcomponet />  
-      <Nav total={msgtatal ? msgtatal : 0} />
+      <FriendComponent>
+        <AnimatePresence>
+          {clicked ? (
+            <AddFriend
+              top = {top}  
+              left = {left}
+              initial={{opacity: 0}}
+              animate={{opacity: 1}}
+              exit={{opacity: 0}}
+            >asd
+            </AddFriend>
+          ) : null}
+        </AnimatePresence>
+        <Screenheader title='Friend'/> 
+
+        <InfoDisplay>
+          <FaInfoCircle className='info' />
+          Friends Names Display 
+          <AiOutlineRightCircle/>
+        </InfoDisplay>
+
+        <Usercomponet avatar={jeawon} name='jeawon' subtitle='열공모드' />
+
+        <Channel>
+          <ChannelHeader>
+            <span>플러스친구</span>
+            <MdArrowUpward size={25} />
+            <AiOutlinePlusSquare size={25} onClick={toggle} style={{cursor: 'pointer'}} />
+          </ChannelHeader>      
+        </Channel>
+
+        <PlusFriend />  
+        <Nav total={msgtatal ? msgtatal : 0} />
+
+      </FriendComponent>
     </>
   )
 }

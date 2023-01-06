@@ -27,11 +27,12 @@ wsServer.on('connection', (socket) =>{
     }
     users.push(socket.id)
     console.log(`users: ${users}`);
-    socket.on('send-message', (message) => {
+    socket.on('send-message', (message, id) => {
         console.log(`message: ${message}`);
+        console.log(`id: ${id}`);
         socket.broadcast.emit('chat-message', {
             message: message,
-            user: socket.id
+            user: socket.id,
         });
     });
 })

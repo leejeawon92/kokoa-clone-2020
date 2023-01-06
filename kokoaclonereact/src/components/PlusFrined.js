@@ -1,15 +1,5 @@
 import styled from "styled-components";
-import {MdArrowUpward} from 'react-icons/md'
 import 열렙전사 from '../image/열렙전사.jpg'
-
-const Channel = styled.div`
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
-  color: rgba(0, 0, 0, 0.8);
-`
-
-const ChannelHeader = styled.div`
-  margin-top: 10px;  
-`
 
 const ChannelComponent = styled.div`
   display: flex;
@@ -40,14 +30,9 @@ const ChannelSubtitle = styled.span`
 const ChannelState = styled.div`
 `
 
-function Channelcomponet(){
+function PlusFriend({src, name}){
   return (
-    <Channel>
-      <ChannelHeader>
-        <span>플러스친구</span>
-        <MdArrowUpward></MdArrowUpward>
-      </ChannelHeader>      
-
+    <>
       <ChannelComponent>
         <ChannelDesc>
           <ChannelAvater src={열렙전사}></ChannelAvater>
@@ -58,8 +43,8 @@ function Channelcomponet(){
         </ChannelDesc>
         <ChannelState></ChannelState>
       </ChannelComponent>
-    </Channel>
+    </>
   )
 }
 
-export default Channelcomponet;
+export default PlusFriend;

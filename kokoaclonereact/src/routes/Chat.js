@@ -69,6 +69,11 @@ function Chat ({socket}){
   const [inputValue, setInputValue] = useState('');
   const [myValue, setMyValue] = useState([]);
   const [otherValue, setOtherValue] = useState([]);
+  let myValueIndex = 0 ;
+  let otherValueIndex = 0 ;
+  
+  // const [myValue, setMyValue] = useState('');
+  // const [otherValue, setOtherValue] = useState('');
   
   const onChangeInput = (event) => {
     setInputValue(event.target.value);
@@ -77,6 +82,7 @@ function Chat ({socket}){
   const onSubmit = (event) => {
     if(event.target.messageInput.value !== ''){
       setMyValue( [ ...myValue, event.target.messageInput.value]);
+      // setMyValue(event.target.messageInput.value);
     }    
     setInputValue('')
     event.preventDefault();
@@ -93,12 +99,27 @@ function Chat ({socket}){
     });
   }, [myValue])
 
+  // const MyorOther = () => {
+  //   if(myValueIndex < myValue.length ) {
+  //     console.log(myValue);
+  //     return       myValue
+  //     .slice(myValueIndex)
+  //     .map((text) =>  <MyMessageComponent key={Math.random()} text={text} />)
+  //     myValueIndex = myValue.length-1;
+  //   } else if(otherValueIndex < otherValue.length) {
+  //     otherValue
+  //       .slice(otherValueIndex)
+  //       .map((text) =>  <OtherMessageComponent key={Math.random()} text={text} />)
+  //     otherValueIndex = otherValue.length-1;
+  //   }
+  // }
 
   return (
     <>
       <AltHeader title='JW'/>
       <ChatMessage>
         <TimeStamp><Moment format='YYYY년 MM월 DD일' interval={1000}></Moment></TimeStamp>
+        {/* {MyorOther()} */}
         {otherValue.map((text) => (<OtherMessageComponent key={Math.random()} text={text} />))}
         {myValue.map((text) => (<MyMessageComponent key={Math.random()} text={text} />))}
       </ChatMessage>

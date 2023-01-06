@@ -38,7 +38,6 @@ const MessageInfo = styled.div`
   }
 `
 function OtherMessageComponent({text}) {
-  console.log(text);
   return (
     <>
       { text !==0  ?
