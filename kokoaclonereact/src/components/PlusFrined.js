@@ -30,14 +30,15 @@ const ChannelSubtitle = styled.span`
 const ChannelState = styled.div`
 `
 
-function PlusFriend({src, name}){
+function PlusFriend({user}){
+  console.log(user);
   return (
     <>
       <ChannelComponent>
         <ChannelDesc>
-          <ChannelAvater src={열렙전사}></ChannelAvater>
+          <ChannelAvater src={user.avatar}></ChannelAvater>
           <ChannelTitle>
-            열렙전사
+            {user.name}
             <ChannelSubtitle></ChannelSubtitle>
           </ChannelTitle>
         </ChannelDesc>
