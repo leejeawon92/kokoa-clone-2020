@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import {AiOutlineRightCircle, AiOutlinePlusSquare} from 'react-icons/ai'
 import { FaInfoCircle} from 'react-icons/fa'
 import Usercomponet from '../components/User'
-import Channelcomponet from '../components/PlusFrined'
 import Screenheader from '../components/ScreenHeader'
 import jeawon from '../image/jeawon.jpg'
 import Nav from '../components/Navbar'
@@ -65,24 +64,28 @@ function Friend(){
   let top = (window.innerHeight /2) - (250/2);
   let left  = (window.innerWidth /2) - (500/2);
 
-  const [name, setName] = useState('');
-  const [avatar, setAvatar] = useState('');
   const [userInfo, setUserInfo] = useState({name: '', avatar: ''});
   const [sub, setSub] = useState(false);
   const onNameChange = (event) => {
-    setName(event.target.value);
     setUserInfo({...userInfo, name: event.target.value});
   }
   const onAvatarChange = (event) => {
-    setAvatar(event.target.value);
-    setUserInfo({...userInfo, avatar: event.target.value});
+    console.log(event.target.files[0]);
+    const reader = new FileReader();
+    reader.onload = () => {
+        if(reader.readyState === 2){
+            setUserInfo({...userInfo, avatar: reader.result})
+        }
+    }
+    console.log(reader.readAsDataURL(event.target.files[0]));
   }
   
   const onClick = (event) => {
     event.preventDefault();
-    setSub((pre) => !pre);
-    
+    setSub((pre) => !pre);  
+    setClick((pre) => !pre)
   }
+
 
   return(
     <>
@@ -107,7 +110,7 @@ function Friend(){
 
         { sub ? <PlusFriend user={userInfo} />  : null  }
         <AnimatePresence>
-          {clicked ? (
+          {clicked ? ( 
             <AddFriend
               top = {top}  
               left = {left}
