@@ -64,29 +64,38 @@ function Friend(){
   let top = (window.innerHeight /2) - (250/2);
   let left  = (window.innerWidth /2) - (500/2);
 
+  const [totalUser, setTotalUser] = useState([]);
   const [userInfo, setUserInfo] = useState({name: '', avatar: ''});
   const [sub, setSub] = useState(false);
   const onNameChange = (event) => {
     setUserInfo({...userInfo, name: event.target.value});
   }
-  const onAvatarChange = (event) => {
-    console.log(event.target.files[0]);
-    const reader = new FileReader();
-    reader.onload = () => {
-        if(reader.readyState === 2){
-            setUserInfo({...userInfo, avatar: reader.result})
-        }
+  const onAvatarChange = (e) => {
+    // console.log(e.target.files);
+    // const reader = new FileReader();
+    // reader.onload = () => {
+    //     if(reader.readyState === 2){
+    //       setUserInfo({...userInfo, avatar: reader.result})
+    //     }
+    // }
+    // console.log(reader.result);
+    if (e.target.files.length) {
+      const reader = new FileReader();
+      reader.readAsDataURL(e.target.files[0]);
+      reader.onload = (e) => {
+        setUserInfo({...userInfo, avatar: e.target.result});
+      };
     }
-    console.log(reader.readAsDataURL(event.target.files[0]));
   }
   
   const onClick = (event) => {
     event.preventDefault();
+    setTotalUser([...totalUser, userInfo])
     setSub((pre) => !pre);  
     setClick((pre) => !pre)
   }
 
-
+  console.log(totalUser);
   return(
     <>
       <FriendComponent>
@@ -107,8 +116,10 @@ function Friend(){
             <AiOutlinePlusSquare size={25} onClick={toggle} style={{cursor: 'pointer'}} />
           </ChannelHeader>      
         </Channel>
-
-        { sub ? <PlusFriend user={userInfo} />  : null  }
+        {totalUser.map((item)=> {
+          return <PlusFriend user={item} />
+        })}
+        {/* { sub ? <PlusFriend user={totalUser} />  : null  } */}
         <AnimatePresence>
           {clicked ? ( 
             <AddFriend

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import 열렙전사 from '../image/열렙전사.jpg'
 
 const ChannelComponent = styled.div`
   display: flex;
@@ -31,9 +30,13 @@ const ChannelState = styled.div`
 `
 
 function PlusFriend({user}){
+  // console.log(user.map((item)=>console.log(item)));
   console.log(user);
   return (
     <>
+      {/* {user.map((new)=>{
+
+      })} */}
       <ChannelComponent>
         <ChannelDesc>
           <ChannelAvater src={user.avatar}></ChannelAvater>
